@@ -169,6 +169,11 @@
     [style*="flex: 1 1 600px"][style*="repeat(3"][data-cn-chips][data-cn-chips] > div > span:last-child { max-width: 100%; font-size: 12px !important; line-height: 16px !important; text-align: center !important; white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important; }
     [data-cn-chips]:not([data-open="1"]) > div:nth-of-type(n+9) { display: none !important; }
     [data-emo-dl], [data-emo-img] { display: none !important; }
+    div:has(> #promo-video) { right: 16px !important; bottom: 16px !important; width: 140px !important; border-radius: 14px !important; }
+    div:has(> #promo-video) > span:last-child { left: 8px !important; right: 8px !important; bottom: 8px !important; padding: 8px 10px !important; font-size: 13px !important; line-height: 18px !important; }
+    div:has(> span > #promo-video-mini) { right: 16px !important; bottom: 16px !important; gap: 8px !important; }
+    div:has(> span > #promo-video-mini) > span:first-child { width: 56px !important; height: 56px !important; border-radius: 14px !important; }
+    div:has(> span > #promo-video-mini) > span:last-child { padding: 12px 18px !important; font-size: 15px !important; }
     footer { background: radial-gradient(120% 90% at 115% 110%, rgba(255,255,255,0.06) 0 48%, rgba(255,255,255,0) 48.3%), linear-gradient(160deg, #1E5A3C 0%, #174A31 100%) !important; }
     footer [style*="grid-template-columns: 2fr 1.1fr"] { padding: 36px 22px 28px !important; }
     footer [style*="grid-template-columns: 2fr 1.1fr"] > div:nth-child(4) { display: none !important; }
@@ -8475,8 +8480,10 @@ class Component extends DCLogic {
     vals.krWeight = lang === "kr" ? 600 : 400;
     vals.enWeight = lang === "en" ? 600 : 400;
     vals.logoSrc = lang === "en" ? "assets/logo-toolkit-en.png" : "assets/logo-toolkit-black.png";
-    vals.vwOpen = false;
-    vals.vwMini = false;
+    const isPC = true;
+    const vwOn = isPC && !this.state.chatOpen && this.state.vwOpen !== false;
+    vals.vwOpen = vwOn;
+    vals.vwMini = isPC && !this.state.chatOpen && this.state.vwOpen === false;
     vals.chatClosedOld = false;
     vals.vwClose = () => {
       const a = document.getElementById("promo-video");
